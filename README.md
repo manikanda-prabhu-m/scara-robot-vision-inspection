@@ -12,28 +12,30 @@ A 3-axis **SCARA robot arm** integrated with a **TensorFlow 2 object detection p
 ---
 
 ## System Architecture
+
+```
 [Pi Camera]
-│
-▼
-[TensorFlow 2 – SSD MobileNet V2]
-├── Trained on custom dataset (LabelImg annotations)
-├── GPU-trained, exported as frozen .pb file
-└── Deployed on Raspberry Pi 4 for real-time inference
-│
-▼
-[Vision Output – XY coordinates of detected object]
-│
-▼
-[Kinematics Engine – Tinyik]
-├── Inverse kinematics → joint angles (θ1, θ2)
-└── Forward kinematics → end-effector position
-│
-▼
-[Servo Controller – PCA9685 over I2C]
-├── Joint 3 – Arm 1 rotation (revolute, Z-axis, ±360°)
-├── Joint 2 – Arm 2 rotation (revolute, Z-axis, -30° to +270°)
-└── Joint 1 – Z-axis linear motion (0 to 10cm)
----
+     |
+     v
+[TensorFlow 2 - SSD MobileNet V2]
+ |-- Trained on custom dataset (LabelImg annotations)
+ |-- GPU-trained, exported as frozen .pb file
+ |-- Deployed on Raspberry Pi 4 for real-time inference
+     |
+     v
+[Vision Output - XY coordinates of detected object]
+     |
+     v
+[Kinematics Engine - Tinyik]
+ |-- Inverse kinematics -> joint angles (theta1, theta2)
+ |-- Forward kinematics -> end-effector position
+     |
+     v
+[Servo Controller - PCA9685 over I2C]
+ |-- Joint 3 - Arm 1 rotation (revolute, Z-axis, +/-360 degrees)
+ |-- Joint 2 - Arm 2 rotation (revolute, Z-axis, -30 to +270 degrees)
+ |-- Joint 1 - Z-axis linear motion (0 to 10cm)
+```
 
 ## Hardware
 
